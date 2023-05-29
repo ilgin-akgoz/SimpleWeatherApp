@@ -1,6 +1,6 @@
 # Simple Weather App
 
-This weather application lets you look at weather information for any city you would like. In the Cities tab, you can select one from the provided list of cities or you may search for a different one.
+This weather application provides weather information for any city the user prefers. The user may select a city from one of the available cities, or search for a different one on the Cities tab.
 
 - MVVM Architecture
 - Programmatic UI
@@ -8,5 +8,7 @@ This weather application lets you look at weather information for any city you w
 
 # Screen Recording
 
-https://github.com/ilgin-akgoz/SimpleWeatherApp/assets/82042228/b50c13b7-3226-4173-ad61-471bc50ad951
+https://github.com/ilgin-akgoz/SimpleWeatherApp/assets/82042228/456c0255-2596-4330-8af9-2755bf07edfe
+
+
 
