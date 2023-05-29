@@ -1,14 +1,14 @@
 //
-//  WeatherCollectionViewCell.swift
+//  WeatherBigCollectionViewCell.swift
 //  SimpleWeatherApp
 //
-//  Created by Ilgın Akgöz on 24.05.2023.
+//  Created by Ilgın Akgöz on 29.05.2023.
 //
 
 import UIKit
 
-final class WeatherCollectionViewCell: UICollectionViewCell {
-    static let cellIdentifier = "WeatherCollectionViewCell"
+final class WeatherBigCollectionViewCell: UICollectionViewCell {
+    static let cellIdentifier = "WeatherBigCollectionViewCell"
     
     private let infoView: UIView = {
         let view = UIView()
@@ -24,7 +24,6 @@ final class WeatherCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Title"
         return label
     }()
     
@@ -33,7 +32,7 @@ final class WeatherCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .right
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Value"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -58,14 +57,14 @@ final class WeatherCollectionViewCell: UICollectionViewCell {
             infoView.leftAnchor.constraint(equalTo: leftAnchor),
             infoView.rightAnchor.constraint(equalTo: rightAnchor),
             infoView.widthAnchor.constraint(equalToConstant: 200),
-            infoView.heightAnchor.constraint(equalToConstant: 80),
-            
+            infoView.heightAnchor.constraint(equalToConstant: 100),
+                    
             titleLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 16),
             titleLabel.centerYAnchor.constraint(equalTo: infoView.centerYAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: valueLabel.leadingAnchor, constant: -8),
-                    
+
             valueLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -16),
-            valueLabel.centerYAnchor.constraint(equalTo: infoView.centerYAnchor)
+            valueLabel.centerYAnchor.constraint(equalTo: infoView.centerYAnchor),
+            valueLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: 8),
             
         ])
     }

@@ -48,24 +48,38 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.cellIdentifier, for: indexPath) as? WeatherCollectionViewCell else {
-            fatalError("Unsupported cell")
+        if indexPath.item % 2 == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherSmallCollectionViewCell.cellIdentifier, for: indexPath) as? WeatherSmallCollectionViewCell else {
+                fatalError("Unsupported cell")
+            }
+            
+            let data = viewModel.collectionViewData[indexPath.item]
+            cell.configureLabels(title: data.title, value: data.value)
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherBigCollectionViewCell.cellIdentifier, for: indexPath) as? WeatherBigCollectionViewCell else {
+                fatalError("Unsupported cell")
+            }
+            
+            let data = viewModel.collectionViewData[indexPath.item]
+            cell.configureLabels(title: data.title, value: data.value)
+            
+            return cell
         }
-        
-        let data = viewModel.collectionViewData[indexPath.item]
-        cell.configureLabels(title: data.title, value: data.value)
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let bounds = UIScreen.main.bounds
-        let width = (bounds.width - 30)
+        let width = collectionView.bounds.width - 30
+        let cellHeight: CGFloat
         
-        return CGSize(
-            width: width,
-            height: width / 3.5
-        )
+        if indexPath.row % 2 == 0 {
+            cellHeight = 80
+        } else {
+            cellHeight = 100
+        }
+
+        return CGSize(width: width, height: cellHeight)
     }
 }
 
@@ -78,9 +92,9 @@ extension WeatherViewController: WeatherViewViewModelDelegate {
 
             self?.viewModel.collectionViewData = [
                 (title: "Humidity", value: "%\(viewModel.humidity)"),
-                (title: "Wind", value: "Speed: \(viewModel.windSpeed)km/h Gust: \(viewModel.windGust)km/h"),
+                (title: "Wind", value: "Speed: \(viewModel.windSpeed)km/h\n\nGust: \(viewModel.windGust)km/h"),
                 (title: "Sea Level", value: "\(viewModel.seaLevel)"),
-                (title: "Coordinates", value: "Latitude: \(viewModel.latitude) Longitude: \(viewModel.longitude)")
+                (title: "Coordinates", value: "Latitude: \(viewModel.latitude)\n\nLongitude: \(viewModel.longitude)")
             ]
 
             self?.weatherView.collectionView.reloadData()

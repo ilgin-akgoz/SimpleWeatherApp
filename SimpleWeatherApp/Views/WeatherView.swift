@@ -54,15 +54,15 @@ final class WeatherView: UIView {
     public let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: layout)
         collectionView.isHidden = false
         collectionView.alpha = 1
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(WeatherCollectionViewCell.self,
-                                forCellWithReuseIdentifier: WeatherCollectionViewCell.cellIdentifier)
-        
+        collectionView.register(WeatherSmallCollectionViewCell.self,
+                                forCellWithReuseIdentifier: WeatherSmallCollectionViewCell.cellIdentifier)
+        collectionView.register(WeatherBigCollectionViewCell.self,
+                                forCellWithReuseIdentifier: WeatherBigCollectionViewCell.cellIdentifier)
         return collectionView
     }()
     
